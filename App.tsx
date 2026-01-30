@@ -9,6 +9,7 @@ import ProductPage from './pages/ProductPage';
 import Support from './pages/Support';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Cart from './pages/Cart';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const ScrollToTop = () => {
@@ -33,14 +34,7 @@ const App: React.FC = () => {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/cart" element={
-              <ProtectedRoute>
-                <div className="pt-32 text-center">
-                  <h1 className="text-3xl font-semibold">Shopping Bag</h1>
-                  <p className="mt-4 text-gray-500">Your bag is empty.</p>
-                </div>
-              </ProtectedRoute>
-            } />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </main>
         <Footer />
