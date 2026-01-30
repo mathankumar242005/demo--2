@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ShoppingBag, Menu, X, Apple } from 'lucide-react';
+import { Search, ShoppingBag, Menu, X, Apple, User } from 'lucide-react';
 import { NAV_LINKS } from '../constants';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { itemCount } = useCart();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,8 +24,8 @@ const Navbar: React.FC = () => {
     <>
       <nav
         className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled || isMobileMenuOpen
-            ? 'bg-black/90 backdrop-blur-md'
-            : 'bg-[#1d1d1f]'
+          ? 'bg-black/90 backdrop-blur-md'
+          : 'bg-[#1d1d1f]'
           }`}
       >
         <div className="max-w-screen-xl mx-auto px-4 h-11 flex justify-between items-center text-[#f5f5f7] text-xs">
@@ -67,6 +69,15 @@ const Navbar: React.FC = () => {
                 </span>
               )}
             </button>
+            {isAuthenticated ? (
+              <button className="hover:opacity-80 transition-opacity" onClick={() => navigate('/profile')}>
+                <User size={16} />
+              </button>
+            ) : (
+              <Link to="/login" className="hover:opacity-80 transition-opacity text-xs font-medium">
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
 
