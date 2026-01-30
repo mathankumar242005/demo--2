@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Store from './pages/Store';
 import ProductPage from './pages/ProductPage';
 import Support from './pages/Support';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -28,8 +31,16 @@ const App: React.FC = () => {
             <Route path="/store" element={<Store />} />
             <Route path="/support" element={<Support />} />
             <Route path="/product/:id" element={<ProductPage />} />
-            {/* Fallback for Cart (Simplified) */}
-            <Route path="/cart" element={<div className="pt-32 text-center"><h1 className="text-3xl font-semibold">Your Bag is Empty</h1><p className="mt-4 text-gray-500">Sign in to see if you have any saved items.</p></div>} />
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/cart" element={
+              <ProtectedRoute>
+                <div className="pt-32 text-center">
+                  <h1 className="text-3xl font-semibold">Shopping Bag</h1>
+                  <p className="mt-4 text-gray-500">Your bag is empty.</p>
+                </div>
+              </ProtectedRoute>
+            } />
           </Routes>
         </main>
         <Footer />
