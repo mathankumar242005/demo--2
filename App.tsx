@@ -10,6 +10,8 @@ import Support from './pages/Support';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import Orders from './pages/Orders';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const ScrollToTop = () => {
@@ -35,6 +37,16 @@ const App: React.FC = () => {
             <Route path="/login" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            } />
+            <Route path="/orders" element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            } />
           </Routes>
         </main>
         <Footer />
